@@ -24,6 +24,11 @@
 	$app->add('/bahan/update', '\Bahan', 'update', 'post');
 	$app->add('/bahan/delete', '\Bahan', 'delete', 'post');
 
+	$app->add('/meja', '\Meja');
+	$app->add('/meja/insert', '\Meja', 'insert', 'post');
+	$app->add('/meja/update', '\Meja', 'update', 'post');
+	$app->add('/meja/delete', '\Meja', 'delete', 'post');
+
 
 	// User Management
 	$app->add('/role', '\Role');
