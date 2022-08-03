@@ -16,7 +16,7 @@ $request = new Request();
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="description" content="Avenxo Admin Theme">
     <meta name="author" content="KaijuThemes">
-
+    <link rel="icon" href="{{ base_url }}assets/auth/restologo.png" type="image/png" sizes="16x16">
     <link type='text/css' href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600'
         rel='stylesheet'>
 

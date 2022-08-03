@@ -48,7 +48,7 @@
  <img src="<?php echo \htmlentities(base_url, ENT_QUOTES, 'UTF-8', false); ?>assets/auth/restologo.png" alt="Application logo" class="auth-logo" />
  <a href="#" class="login-logo">Resto App</a>
  <h3><b>Log In Ke RestoApp</b></h3>
- <p style="color: #A4A6B3">Masukan Id dan Password</p>
+ <p style="color: #A4A6B3">Masukan Email dan Password</p>
  </div>
  <div class="row">
  <div class="col-md-6 col-md-offset-3">
@@ -68,23 +68,10 @@
  <input type="password" class="form-control" id="password" placeholder="Password">
  </div>
  </div>
-
- <?php /* <div class="form-group mb-n">
- <div class="col-xs-12">
- <a href="extras-forgotpassword.html" class="pull-left">Forgot password?</a>
- <div class="checkbox-inline icheck pull-right p-n">
- <label for="">
- <input type="checkbox"></input>
- Remember me
- </label>
- </div>
- </div>
- </div> */ ?>
  </div>
  <div class="panel-footer">
  <div class="clearfix">
- <?php /* <a href="extras-registration.html" class="btn btn-default pull-left">Register</a> */ ?>
- <button type="submit" class="btn btn-primary pull-right">Login</button>
+ <button type="submit" class="btn btn-primary btn-block">Log in</button>
  </div>
  </div>
  </div>
