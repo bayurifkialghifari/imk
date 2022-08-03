@@ -16,8 +16,16 @@
 	*/
 
 	// Router
-	$app->add('/', '\Role');
+	$app->add('/', '\Dashboard');
 
+	// Master data 
+	$app->add('/bahan', '\Bahan');
+	$app->add('/bahan/insert', '\Bahan', 'insert', 'post');
+	$app->add('/bahan/update', '\Bahan', 'update', 'post');
+	$app->add('/bahan/delete', '\Bahan', 'delete', 'post');
+
+
+	// User Management
 	$app->add('/role', '\Role');
 	$app->add('/role/insert', '\Role', 'insert', 'post');
 	$app->add('/role/update', '\Role', 'update', 'post');

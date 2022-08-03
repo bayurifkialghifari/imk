@@ -1,0 +1,7 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+<?php $this->stopSection(); ?>
+<?php $this->startPush('scripts'); ?>
+<?php $this->stopPush(); ?>
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.plain'); } ?>
