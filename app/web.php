@@ -29,6 +29,11 @@
 	$app->add('/meja/update', '\Meja', 'update', 'post');
 	$app->add('/meja/delete', '\Meja', 'delete', 'post');
 
+	$app->add('/tipe', '\Tipe');
+	$app->add('/tipe/insert', '\Tipe', 'insert', 'post');
+	$app->add('/tipe/update', '\Tipe', 'update', 'post');
+	$app->add('/tipe/delete', '\Tipe', 'delete', 'post');
+
 
 	// User Management
 	$app->add('/role', '\Role');

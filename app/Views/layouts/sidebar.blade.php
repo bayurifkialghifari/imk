@@ -5,6 +5,7 @@
             <ul class="acc-menu">
                 <li><a href="{{ base_url }}bahan">Bahan</a></li>
                 <li><a href="{{ base_url }}meja">Meja</a></li>
+                <li><a href="{{ base_url }}tipe">Tipe</a></li>
             </ul>
         </li>
         <li><a href="javascript:void();"><i class="fa fa-lock"></i><span>User Management</span></a>
