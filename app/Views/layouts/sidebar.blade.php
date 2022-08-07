@@ -2,6 +2,8 @@
     <ul class="acc-menu">
         <li><a href="{{ base_url }}"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
         <li><a href="{{ base_url }}menu"><i class="fa fa-list"></i>Menu</a></li>
+        <li><a href="{{ base_url }}pesanan"><i class="fa fa-list"></i>Pesanan</a></li>
+        <li><a href="{{ base_url }}meja-pelanggan"><i class="fa fa-table"></i>Meja Pelanggan</a></li>
         <li><a href="javascript:void();"><i class="fa fa-database"></i><span>Master Data</span></a>
             <ul class="acc-menu">
                 <li><a href="{{ base_url }}bahan">Bahan</a></li>

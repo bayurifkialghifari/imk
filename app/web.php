@@ -49,6 +49,16 @@
 	$app->add('/menu/resep/update', '\Resep', 'update', 'post');
 	$app->add('/menu/resep/delete', '\Resep', 'delete', 'post');
 
+	// Pesanan
+	$app->add('/pesanan', '\Pesanan');
+	$app->add('/pesanan/insert', '\Pesanan', 'insert', 'post');
+	$app->add('/pesanan/update', '\Pesanan', 'update', 'post');
+	$app->add('/pesanan/delete', '\Pesanan', 'delete', 'post');
+
+	// Meja Pelanggan
+	$app->add('/meja-pelanggan', '\MejaPelanggan');
+	$app->add('/meja-pelanggan/isi_meja', '\MejaPelanggan', 'isi_meja', 'post');
+	$app->add('/meja-pelanggan/batal_isi', '\MejaPelanggan', 'batal_isi', 'post');
 
 	// User Management
 	$app->add('/role', '\Role');
