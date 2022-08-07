@@ -39,6 +39,9 @@
 	$app->add('/menu/insert', '\Menu', 'insert', 'post');
 	$app->add('/menu/update', '\Menu', 'update', 'post');
 	$app->add('/menu/delete', '\Menu', 'delete', 'post');
+	$app->add('/menu/checkResep', '\Menu', 'checkResep');
+	$app->add('/menu/addStok', '\Menu', 'addStok', 'post');
+	$app->add('/menu/minStok', '\Menu', 'minStok', 'post');
 
 	// Resep
 	$app->add('/menu/resep', '\Resep');

@@ -70,10 +70,12 @@
  ?>
 
  <?php if($rdata->num_rows > 0): ?>
- <button class="btn btn-success btn-sm" onclick="addStok()">
+ <button class="btn btn-success btn-sm"
+ onclick="addStok(<?php echo \htmlentities($d['id'], ENT_QUOTES, 'UTF-8', false); ?>, '<?php echo \htmlentities($d['nama'], ENT_QUOTES, 'UTF-8', false); ?>', '<?php echo \htmlentities($d['stok'], ENT_QUOTES, 'UTF-8', false); ?>')">
  <i class="fa fa-plus"></i> Add Stok
  </button>
- <button class="btn btn-danger btn-sm" onclick="">
+ <button class="btn btn-danger btn-sm"
+ onclick="minStok(<?php echo \htmlentities($d['id'], ENT_QUOTES, 'UTF-8', false); ?>, '<?php echo \htmlentities($d['nama'], ENT_QUOTES, 'UTF-8', false); ?>', '<?php echo \htmlentities($d['stok'], ENT_QUOTES, 'UTF-8', false); ?>')">
  <i class="fa fa-minus"></i> Min Stok
  </button>
  <?php else: ?>
@@ -182,10 +184,84 @@
  </form>
  </div><!-- /.modal-dialog -->
  </div><!-- /.modal -->
+
+ <!-- Modal Incrase and Decrase Stok -->
+ <div class="modal fade" id="myModalStok" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog">
+ <form id="form-stok">
+ <div class="modal-content">
+ <div class="modal-header">
+ <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+ &times;
+ </button>
+ <h4 class="modal-title" id="myModalLabelStok"></h4>
+ </div>
+ <div class="modal-body">
+ <input type="hidden" name="id_stok" id="id_stok">
+ <div class="row">
+ <div class="col-md-12">
+ <table id="table-bahan" class="table table-striped table-bordered" cellspacing="0"
+ width="100%">
+ <thead>
+ <tr>
+ <th>Bahan</th>
+ <th>Yang Dibutuhkan (Gram)</th>
+ <th>Yang Tersedia (Gram)</th>
+ </tr>
+ </thead>
+ <tbody id="table-bahan-data"></tbody>
+ </table>
+ </div>
+ </div>
+ <div class="row">
+ <div class="col-md-6">
+ <div class="form-group">
+ <label for="nama"> Stok Sekarang</label>
+ <input type="number" class="form-control" id="stok_sekarang"
+ placeholder="Stok sekarang" readonly="readonly" required />
+ </div>
+ </div>
+ <div class="col-md-6">
+ <div class="form-group">
+ <label for="nama" id="label-stok-input"> </label>
+ <input type="number" class="form-control" id="stok_input" placeholder=""
+ required />
+ </div>
+ </div>
+ <div class="col-md-12">
+ <div class="form-group">
+ <label for="nama">Stok Final </label>
+ <input type="number" class="form-control" id="stok_final" placeholder=""
+ readonly="readonly" required />
+ </div>
+ </div>
+ </div>
+ </div>
+ <div class="modal-footer">
+ <button type="submit" class="btn btn-primary">
+ Submit
+ </button>
+ <button type="button" class="btn btn-danger" data-dismiss="modal">
+ Cancel
+ </button>
+ </div>
+ </div><!-- /.modal-content -->
+ </form>
+ </div><!-- /.modal-dialog -->
+ </div><!-- /.modal -->
 <?php $this->stopSection(); ?>
 
 <?php $this->startPush('scripts'); ?>
  <script>
+ let postType
+ let addMin
+
+ // Plus Minus Stok
+ let idMenu
+ let dataBahan
+ let stokNow = 0
+
  // File Review Function
  function readURL(input, id) {
  if (input.files && input.files[0]) {
@@ -200,7 +276,69 @@
  }
  }
 
- let postType
+ // Add stok menu
+ function addStok(id, nama, stoknow) {
+ // Delete all datable
+ $('#table-bahan').DataTable().clear().destroy()
+ $('#table-bahan-data').html('')
+
+ // Set label
+ $('#myModalLabelStok').html('Add Stok ' + nama)
+ $('#label-stok-input').html('Stok Ditambahkan')
+ $('#myModalStok').modal('show')
+
+ addMin = 'add'
+
+ showResep(id, stoknow)
+ }
+
+ // Min stok menu
+ function minStok(id, nama, stoknow) {
+ // Delete all datable
+ $('#table-bahan').DataTable().clear().destroy()
+ $('#table-bahan-data').html('')
+
+ // Set label
+ $('#myModalLabelStok').html('Min Stok ' + nama)
+ $('#label-stok-input').html('Stok Dikurang')
+ $('#myModalStok').modal('show')
+
+ addMin = 'min'
+
+ showResep(id, stoknow)
+ }
+
+ // Show data resep
+ function showResep(id, stoknow) {
+ idMenu = id
+ stokNow = stoknow
+
+ // Set Stok
+ $('#stok_sekarang').val(stokNow)
+
+ $.ajax({
+ url: `<?php echo \htmlentities(base_url, ENT_QUOTES, 'UTF-8', false); ?>menu/checkResep?id=${id}`,
+ success(data) {
+ data = JSON.parse(data)
+ dataBahan = data
+
+ // Echo data
+ data.forEach(r => {
+ $('#table-bahan-data').append(`<tr>
+ <td>${r.bahan}</td>
+ <td>${r.jumlah}</td>
+ <td>${r.bahan_stok}</td>
+ </tr>`)
+ })
+
+ // Re initialize datatables
+ $('#table-bahan').DataTable()
+ },
+ error($xhr) {
+ toastr.warning($xhr.statusText, 'Failed')
+ }
+ })
+ }
 
  // Delete function
  let destroy = id => {
@@ -224,9 +362,7 @@
  },
  success(data) {
  if (JSON.parse(data)) {
- toastr.success(
- `Data berhasil dihapus`,
- 'Success')
+ toastr.success(`Data berhasil dihapus`, 'Success')
 
  setTimeout(() => {
  location.reload()
@@ -263,9 +399,33 @@
  }
 
  $(() => {
+ // Initialize datatables
+ $('#table-bahan').DataTable()
+
  // On Change Review File
  $("#gambar").change(function() {
  readURL(this, 'image-preview')
+ })
+
+ // Stok onchange
+ $('#stok_input').on('change', () => {
+ let stokInput = $('#stok_input').val()
+ let temporarystokNow
+
+ // Check if its + or -
+ if (addMin == 'add') {
+ $('#stok_final').val(Number(stokNow) + Number(stokInput))
+ } else {
+ temporarystokNow = Number(stokNow) - Number(stokInput)
+
+ if (Number(temporarystokNow) < 0) {
+ $('#stok_input').val(0)
+
+ alert('Stok cannot be less than 0')
+ } else {
+ $('#stok_final').val(temporarystokNow)
+ }
+ }
  })
 
  // Add button click
@@ -320,6 +480,58 @@
  toastr.warning($xhr.statusText, 'Failed')
  }
  })
+ })
+
+ // Add Min Stok Submit
+ $('#form-stok').submit(ev => {
+ ev.preventDefault()
+
+ let stok_input = $('#stok_input').val()
+ let stok_final = $('#stok_final').val()
+
+ // Cek plus or min
+ let url = addMin == 'add' ?
+ '<?php echo \htmlentities(base_url, ENT_QUOTES, 'UTF-8', false); ?>menu/addStok' :
+ '<?php echo \htmlentities(base_url, ENT_QUOTES, 'UTF-8', false); ?>menu/minStok';
+
+ // Cek stok input
+ if (stok_input > 0) {
+ $.ajax({
+ method: 'post',
+ url: `${url}?id=${idMenu}`,
+ data: {
+ id: idMenu,
+ stok_input: stok_input,
+ stok_final: stok_final,
+ bahan: dataBahan,
+ },
+ success(data) {
+ data = JSON.parse(data)
+
+ // If sukses
+ if (data.status) {
+ toastr.success(
+ `Data berhasil ${addMin == 'add' ? 'ditambah' : 'dikurang'}`,
+ 'Success')
+
+ setTimeout(() => {
+ location.reload()
+ }, 500)
+
+ }
+ // Else
+ else {
+ toastr.warning('Ada bahan yang tidak mencukupi !', 'Failed')
+ }
+
+ },
+ error($xhr) {
+ toastr.warning($xhr.statusText, 'Failed')
+ }
+ })
+ } else {
+ toastr.warning('Stok kurang dari 0', 'Failed')
+ }
  })
  })
  </script>

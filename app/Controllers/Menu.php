@@ -7,6 +7,7 @@
 	use App\Models\Menu as Menus;
 	use App\Models\Tipe;
 	use App\Models\Resep;
+	use App\Models\Bahan;
 	use App\Liblaries\Upload;
 	use App\Core\Request;
 
@@ -81,5 +82,113 @@
 			$exe = $menu->delete(['id' => $request->post('id')]);
 
 			echo json_encode($exe);
+		}
+
+		// Check resep spesific menu
+		public function checkResep() {
+			$resep = new Resep;
+			$request = new Request;
+
+			// Get menu id
+			$id = $request->get('id');
+
+			// Get data resep
+			$get = $resep->select('resep.*, bahan.nama as bahan, bahan.stok as bahan_stok')
+			->join('bahan', 'bahan.id', 'resep.id_bahan')
+            ->where('resep.id_menu', $id)
+			->get();
+
+			echo json_encode($resep->result_array($get));
+		}
+
+		// Add stok	menu
+		public function addStok() {
+			$request = new Request;
+			$menu = new Menus;
+			$bahan = new Bahan;
+
+			// Get id menu
+			$id = $request->get('id');
+			
+			// Status stok tersedia atau tidak
+			$bahanupdate = [];
+			$status = true;
+
+			// Get data post
+			$data = $request->post_all();
+
+			// Cek stok tersedia
+			foreach($data['bahan'] as $b) {
+				// Stok sekarang di kurang stok input
+				$stokNow = (int)$b['bahan_stok'] - ((int)$b['jumlah'] * (int)$data['stok_input']);
+				array_push($bahanupdate, [
+					'id' => $b['id_bahan'],
+					'stok' => $stokNow,
+				]);
+				
+				// Cek stok tersedia atau tidak
+				if((int)$stokNow < 0) {
+					$status = false;
+					break;
+				}
+			}
+
+			// If Bahan mencukupi
+			if ($status) {
+
+				// Update stok bahan
+				foreach($bahanupdate as $bu) {
+					$exe = $bahan->update(['id' => $bu['id']], [
+						'stok' => $bu['stok']
+					]);	
+				}
+
+				// Tambah stok menu
+				$plus = $menu->update(['id' => $id], [
+					'stok' => $data['stok_final']
+				]);
+
+				echo json_encode([
+					'status' => true,
+					'data' => $bahanupdate
+				]);
+			} else {
+				echo json_encode([
+					'status' => false,
+					'data' => []
+				]);
+			}
+		}
+
+		// Min stok menu
+		public function minStok() {
+			$request = new Request;
+			$menu = new Menus;
+			$bahan = new Bahan;
+
+			// Get id menu
+			$id = $request->get('id');
+
+			// Get data post
+			$data = $request->post_all();
+
+			// Tambah stok tersedia
+			foreach($data['bahan'] as $b) {
+				$stokNow = (int)$b['bahan_stok'] + ((int)$b['jumlah'] * (int)$data['stok_input']);
+
+				$exe = $bahan->update(['id' => $b['id_bahan']], [
+					'stok' => $stokNow
+				]);	
+			}
+
+			// Kurang stok menu
+			$plus = $menu->update(['id' => $id], [
+				'stok' => $data['stok_final']
+			]);
+
+			echo json_encode([
+				'status' => true,
+				'data' => $data['bahan']
+			]);
 		}
 	}
