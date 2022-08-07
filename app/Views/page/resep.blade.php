@@ -29,6 +29,7 @@
                                     <tr>
                                         <th>Bahan</th>
                                         <th>Jumlah (Gram)</th>
+                                        <th>Stok Tersedia (Gram)</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -37,6 +38,7 @@
                                         <tr class="odd gradeX">
                                             <td>{{ $d['bahan'] }}</td>
                                             <td>{{ $d['jumlah'] }}</td>
+                                            <td>{{ $d['bahan_stok'] }}</td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm"
                                                     onclick="destroy(`{{ $d['id'] }}`)">

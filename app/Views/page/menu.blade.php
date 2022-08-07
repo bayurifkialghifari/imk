@@ -63,13 +63,22 @@
                                                 </a>
 
                                                 <br />
+                                                <br />
+                                                @php
+                                                    $rdata = $resep->find(['id_menu' => $d['id']]);
+                                                @endphp
 
-                                                <button class="btn btn-success btn-sm" onclick="">
-                                                    <i class="fa fa-plus"></i> Add Stok
-                                                </button>
-                                                <button class="btn btn-danger btn-sm" onclick="">
-                                                    <i class="fa fa-minus"></i> Min Stok
-                                                </button>
+                                                @if ($rdata->num_rows > 0)
+                                                    <button class="btn btn-success btn-sm" onclick="addStok()">
+                                                        <i class="fa fa-plus"></i> Add Stok
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm" onclick="">
+                                                        <i class="fa fa-minus"></i> Min Stok
+                                                    </button>
+                                                @else
+                                                    <button role="button" class="btn btn-success">Resep Masih
+                                                        Kosong</button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

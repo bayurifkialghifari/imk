@@ -21,7 +21,7 @@
             $menu = new Menu;
             $bahan = new Bahan;
             $id = $request->get('menu');
-			$get = $resep->select('resep.*, bahan.nama as bahan')
+			$get = $resep->select('resep.*, bahan.nama as bahan, bahan.stok as bahan_stok')
 			->join('bahan', 'bahan.id', 'resep.id_bahan')
             ->where('resep.id_menu', $id)
 			->get();

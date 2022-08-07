@@ -6,6 +6,7 @@
 	use App\Liblaries\Sesion;
 	use App\Models\Menu as Menus;
 	use App\Models\Tipe;
+	use App\Models\Resep;
 	use App\Liblaries\Upload;
 	use App\Core\Request;
 
@@ -18,6 +19,7 @@
 		public function index() {
 			$menu = new Menus;
             $tipe = new Tipe;
+			$resep = new Resep;
 			$get = $menu->select('menu.*, tipe.nama as nama_tipe')
 			->join('tipe', 'tipe.id', 'menu.id_tipe')
 			->get();
@@ -26,6 +28,7 @@
 			$data['title'] = 'Menu';
 			$data['data'] = $menu->result_array($get);
 			$data['tipe'] = $tipe->result_array($dtipe);
+			$data['resep'] = $resep;
 
 			view('page.menu', $data);
 		}
