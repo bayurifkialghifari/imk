@@ -41,7 +41,10 @@
                                         <tr class="odd gradeX">
                                             <td>{{ $d['nama_tipe'] }}</td>
                                             <td>{{ $d['nama'] }}</td>
-                                            <td>{{ $d['gambar'] }}</td>
+                                            <td>
+                                                <a href="{{ base_url }}upload/menu/{{ $d['gambar'] }}"
+                                                    target="_blank">{{ $d['gambar'] }}</a>
+                                            </td>
                                             <td>{{ $d['keterangan'] }}</td>
                                             <td>{{ $d['harga'] }}</td>
                                             <td>{{ $d['stok'] }}</td>
@@ -53,6 +56,19 @@
                                                 <button class="btn btn-primary btn-sm"
                                                     onclick="update(`{{ $d['id'] }}`, `{{ $d['id_tipe'] }}`, `{{ $d['nama'] }}`, `{{ $d['gambar'] }}`, `{{ $d['keterangan'] }}`, `{{ $d['harga'] }}`, `{{ $d['stok'] }}` )">
                                                     <i class="fa fa-pencil"></i> Update
+                                                </button>
+                                                <a class="btn btn-warning btn-sm"
+                                                    href="{{ base_url }}menu/resep?menu={{ $d['id'] }}">
+                                                    <i class="fa fa-info-circle"></i> Resep
+                                                </a>
+
+                                                <br />
+
+                                                <button class="btn btn-success btn-sm" onclick="">
+                                                    <i class="fa fa-plus"></i> Add Stok
+                                                </button>
+                                                <button class="btn btn-danger btn-sm" onclick="">
+                                                    <i class="fa fa-minus"></i> Min Stok
                                                 </button>
                                             </td>
                                         </tr>
@@ -133,7 +149,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="stok"> Stok</label>
@@ -141,7 +157,7 @@
                                         required />
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">
@@ -265,7 +281,7 @@
                 fd.append('nama', $('input[name="nama"]').val())
                 fd.append('keterangan', $('textarea[name="keterangan"]').val())
                 fd.append('harga', $('input[name="harga"]').val())
-                fd.append('stok', $('input[name="stok"]').val())
+                // fd.append('stok', $('input[name="stok"]').val())
 
                 // Check if image not change
                 if (gambar !== undefined) {

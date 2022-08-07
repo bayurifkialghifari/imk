@@ -42,7 +42,10 @@
  <tr class="odd gradeX">
  <td><?php echo \htmlentities($d['nama_tipe'], ENT_QUOTES, 'UTF-8', false); ?></td>
  <td><?php echo \htmlentities($d['nama'], ENT_QUOTES, 'UTF-8', false); ?></td>
- <td><?php echo \htmlentities($d['gambar'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td>
+ <a href="<?php echo \htmlentities(base_url, ENT_QUOTES, 'UTF-8', false); ?>upload/menu/<?php echo \htmlentities($d['gambar'], ENT_QUOTES, 'UTF-8', false); ?>"
+ target="_blank"><?php echo \htmlentities($d['gambar'], ENT_QUOTES, 'UTF-8', false); ?></a>
+ </td>
  <td><?php echo \htmlentities($d['keterangan'], ENT_QUOTES, 'UTF-8', false); ?></td>
  <td><?php echo \htmlentities($d['harga'], ENT_QUOTES, 'UTF-8', false); ?></td>
  <td><?php echo \htmlentities($d['stok'], ENT_QUOTES, 'UTF-8', false); ?></td>
@@ -54,6 +57,19 @@
  <button class="btn btn-primary btn-sm"
  onclick="update(`<?php echo \htmlentities($d['id'], ENT_QUOTES, 'UTF-8', false); ?>`, `<?php echo \htmlentities($d['id_tipe'], ENT_QUOTES, 'UTF-8', false); ?>`, `<?php echo \htmlentities($d['nama'], ENT_QUOTES, 'UTF-8', false); ?>`, `<?php echo \htmlentities($d['gambar'], ENT_QUOTES, 'UTF-8', false); ?>`, `<?php echo \htmlentities($d['keterangan'], ENT_QUOTES, 'UTF-8', false); ?>`, `<?php echo \htmlentities($d['harga'], ENT_QUOTES, 'UTF-8', false); ?>`, `<?php echo \htmlentities($d['stok'], ENT_QUOTES, 'UTF-8', false); ?>` )">
  <i class="fa fa-pencil"></i> Update
+ </button>
+ <a class="btn btn-warning btn-sm"
+ href="<?php echo \htmlentities(base_url, ENT_QUOTES, 'UTF-8', false); ?>menu/resep?menu=<?php echo \htmlentities($d['id'], ENT_QUOTES, 'UTF-8', false); ?>">
+ <i class="fa fa-info-circle"></i> Resep
+ </a>
+
+ <br />
+
+ <button class="btn btn-success btn-sm" onclick="">
+ <i class="fa fa-plus"></i> Add Stok
+ </button>
+ <button class="btn btn-danger btn-sm" onclick="">
+ <i class="fa fa-minus"></i> Min Stok
  </button>
  </td>
  </tr>
@@ -135,7 +151,7 @@
  </div>
  </div>
  </div>
- <div class="row">
+ <?php /* <div class="row">
  <div class="col-md-12">
  <div class="form-group">
  <label for="stok"> Stok</label>
@@ -143,7 +159,7 @@
  required />
  </div>
  </div>
- </div>
+ </div> */ ?>
  </div>
  <div class="modal-footer">
  <button type="submit" class="btn btn-primary">
@@ -267,7 +283,7 @@
  fd.append('nama', $('input[name="nama"]').val())
  fd.append('keterangan', $('textarea[name="keterangan"]').val())
  fd.append('harga', $('input[name="harga"]').val())
- fd.append('stok', $('input[name="stok"]').val())
+ // fd.append('stok', $('input[name="stok"]').val())
 
  // Check if image not change
  if (gambar !== undefined) {

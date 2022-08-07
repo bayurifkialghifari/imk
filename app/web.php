@@ -40,6 +40,12 @@
 	$app->add('/menu/update', '\Menu', 'update', 'post');
 	$app->add('/menu/delete', '\Menu', 'delete', 'post');
 
+	// Resep
+	$app->add('/menu/resep', '\Resep');
+	$app->add('/menu/resep/insert', '\Resep', 'insert', 'post');
+	$app->add('/menu/resep/update', '\Resep', 'update', 'post');
+	$app->add('/menu/resep/delete', '\Resep', 'delete', 'post');
+
 
 	// User Management
 	$app->add('/role', '\Role');

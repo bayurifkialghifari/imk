@@ -2,8 +2,8 @@
 @section('content')
     <ol class="breadcrumb">
 
-        <li><a href="#">Master Data</a></li>
-        <li class="active"><a href="#">Bahan</a></li>
+        <li><a href="{{ base_url }}menu">Menu</a></li>
+        <li class="active"><a href="#">Resep {{ $menu['nama'] }}</a></li>
 
     </ol>
     <div class="container-fluid">
@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h2>List Bahan</h2>
+                            <h2>Resep {{ $menu['nama'] }}</h2>
                             <div class="panel-ctrls"></div>
                         </div>
                         <div class="panel-body">
@@ -27,25 +27,23 @@
                             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Nama</th>
-                                        <th>Stok (Gram)</th>
-                                        <th>Harga</th>
+                                        <th>Bahan</th>
+                                        <th>Jumlah (Gram)</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $d)
                                         <tr class="odd gradeX">
-                                            <td>{{ $d['nama'] }}</td>
-                                            <td>{{ $d['stok'] }}</td>
-                                            <td>{{ $d['harga'] }}</td>
+                                            <td>{{ $d['bahan'] }}</td>
+                                            <td>{{ $d['jumlah'] }}</td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm"
                                                     onclick="destroy(`{{ $d['id'] }}`)">
                                                     <i class="fa fa-trash-o"></i> Delete
                                                 </button>
                                                 <button class="btn btn-primary btn-sm"
-                                                    onclick="update(`{{ $d['id'] }}`, `{{ $d['nama'] }}`, `{{ $d['stok'] }}`, `{{ $d['harga'] }}`)">
+                                                    onclick="update(`{{ $d['id'] }}`, `{{ $d['id_bahan'] }}`, `{{ $d['jumlah'] }}`, `{{ $d['satuan'] }}`)">
                                                     <i class="fa fa-pencil"></i> Update
                                                 </button>
                                             </td>
@@ -74,33 +72,29 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" id="id">
+                        <input type="hidden" name="id_menu" id="id_menu" value="{{ $id }}">
+                        <input type="hidden" name="satuan" id="satuan" value="KG">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="nama"> Nama</label>
-                                    <input type="text" class="form-control" name="nama" placeholder="Nama" required />
+                                    <label for="nama"> Bahan</label>
+                                    <select name="id_bahan" class="form-control" required>
+                                        @foreach ($bahan as $r)
+                                            <option value="{{ $r['id'] }}">{{ $r['nama'] }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="harga"> Harga</label>
-                                    <input type="number" class="form-control" name="harga" placeholder="Harga"
+                                    <label for="jumlah"> Jumlah (Gram)</label>
+                                    <input type="number" class="form-control" step=any name="jumlah" placeholder="Jumlah"
                                         required />
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="stok"> Stok (Gram)</label>
-                                    <input type="number" class="form-control" name="stok" step=any placeholder="Stok"
-                                        required />
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">
@@ -135,7 +129,7 @@
                             toastr.clear()
 
                             $.ajax({
-                                url: '{{ base_url }}bahan/delete',
+                                url: '{{ base_url }}menu/resep/delete',
                                 method: 'post',
                                 data: {
                                     id: id,
@@ -167,12 +161,11 @@
         }
 
         // Update button click
-        let update = (id, nama, harga, stok) => {
+        let update = (id, bahan, jumlah, satuan) => {
             postType = 'update'
             $('#id').val(id)
-            $('input[name="nama"]').val(nama)
-            $('input[name="harga"]').val(harga)
-            $('input[name="stok"]').val(stok)
+            $('select[name="id_bahan"]').val(bahan).change()
+            $('input[name="jumlah"]').val(jumlah)
             $('#myModalLabel').html('Update {{ $title }}')
             $('#myModal').modal('show')
         }
@@ -190,8 +183,8 @@
                 ev.preventDefault()
 
                 let url = postType == 'create' ?
-                    '{{ base_url }}bahan/insert' :
-                    '{{ base_url }}bahan/update';
+                    '{{ base_url }}menu/resep/insert' :
+                    '{{ base_url }}menu/resep/update';
 
                 $.ajax({
                     url: url,
