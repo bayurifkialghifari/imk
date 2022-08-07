@@ -1,6 +1,9 @@
 # ACCESS
 
 username = admin@admin.com <br>
+username = pelayan@pelayan.com <br>
+username = koki@koki.com <br>
+username = kasir@kasir.com <br>
 password = Cimahi123
 
 # GUD-FRAMEWORK-PHP
