@@ -153,7 +153,7 @@
 	        * Set parameter upload
 	        *
 	        */
-			$target_dir 		= '../public/'  . $folder;
+			$target_dir 		= '../public/upload/'  . $folder;
             $new_filename       = time() . basename($_FILES[$filename]['name']);
 			$target_file 		= $target_dir  	. $new_filename;
 			$imageFileType 		= strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

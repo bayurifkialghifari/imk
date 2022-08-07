@@ -34,6 +34,12 @@
 	$app->add('/tipe/update', '\Tipe', 'update', 'post');
 	$app->add('/tipe/delete', '\Tipe', 'delete', 'post');
 
+	// Menu
+	$app->add('/menu', '\Menu');
+	$app->add('/menu/insert', '\Menu', 'insert', 'post');
+	$app->add('/menu/update', '\Menu', 'update', 'post');
+	$app->add('/menu/delete', '\Menu', 'delete', 'post');
+
 
 	// User Management
 	$app->add('/role', '\Role');

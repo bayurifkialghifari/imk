@@ -2,8 +2,8 @@
 @section('content')
     <ol class="breadcrumb">
 
-        <li><a href="#">User Management</a></li>
-        <li class="active"><a href="#">User</a></li>
+        <li><a href="#">Master Data</a></li>
+        <li class="active"><a href="#">Meja</a></li>
 
     </ol>
     <div class="container-fluid">
@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h2>List User</h2>
+                            <h2>List Meja</h2>
                             <div class="panel-ctrls"></div>
                         </div>
                         <div class="panel-body">
@@ -27,25 +27,31 @@
                             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Email</th>
+                                        <th>Tipe</th>
                                         <th>Nama</th>
-                                        <th>Role</th>
+                                        <th>Gambar</th>
+                                        <th>Keterangan</th>
+                                        <th>Harga (RP)</th>
+                                        <th>Stok</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $d)
                                         <tr class="odd gradeX">
-                                            <td>{{ $d['email'] }}</td>
+                                            <td>{{ $d['nama_tipe'] }}</td>
                                             <td>{{ $d['nama'] }}</td>
-                                            <td>{{ $d['role_name'] }}</td>
+                                            <td>{{ $d['gambar'] }}</td>
+                                            <td>{{ $d['keterangan'] }}</td>
+                                            <td>{{ $d['harga'] }}</td>
+                                            <td>{{ $d['stok'] }}</td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm"
                                                     onclick="destroy(`{{ $d['id'] }}`)">
                                                     <i class="fa fa-trash-o"></i> Delete
                                                 </button>
                                                 <button class="btn btn-primary btn-sm"
-                                                    onclick="update(`{{ $d['id'] }}`, `{{ $d['email'] }}`, `{{ $d['nama'] }}`, `{{ $d['role_id'] }}` )">
+                                                    onclick="update(`{{ $d['id'] }}`, `{{ $d['id_tipe'] }}`, `{{ $d['nama'] }}`, `{{ $d['gambar'] }}`, `{{ $d['keterangan'] }}`, `{{ $d['harga'] }}`, `{{ $d['stok'] }}` )">
                                                     <i class="fa fa-pencil"></i> Update
                                                 </button>
                                             </td>
@@ -77,18 +83,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="nama"> Email</label>
-                                    <input type="email" class="form-control" name="email" placeholder="Email"
-                                        required />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="nama"> Password</label>
-                                    <input type="password" class="form-control" name="password" placeholder="Password"
-                                        required />
+                                    <label for="id_tipe"> Tipe</label>
+                                    <select name="id_tipe" class="form-control" required>
+                                        @foreach ($tipe as $r)
+                                            <option value="{{ $r['id'] }}">{{ $r['nama'] }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -101,18 +101,47 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="nama"> Role</label>
-                                    <select name="role_id" class="form-control" required>
-                                        @foreach ($role as $r)
-                                            <option value="{{ $r['id'] }}">{{ $r['nama'] }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="gambar">Gambar</label>
+                                    <input type="file" id="gambar" class="form-control" name="gambar"
+                                        placeholder="Gambar" accept="image/*" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="gambar">Preview Image</label>
+                                    <br>
+                                    <img src="" id="image-preview" width="50%">
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="keterangan"> Keterangan</label>
+                                    <textarea class="form-control" name="keterangan" placeholder="Keterangan" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="harga"> Harga</label>
+                                    <input type="number" class="form-control" name="harga" placeholder="Harga"
+                                        required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="stok"> Stok</label>
+                                    <input type="number" class="form-control" name="stok" placeholder="Stok"
+                                        required />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">
@@ -130,6 +159,20 @@
 
 @push('scripts')
     <script>
+        // File Review Function
+        function readURL(input, id) {
+            if (input.files && input.files[0]) {
+
+                let reader = new FileReader()
+
+                reader.onload = function(e) {
+                    $(`#${id}`).attr('src', e.target.result)
+                }
+
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+
         let postType
 
         // Delete function
@@ -147,19 +190,23 @@
                             toastr.clear()
 
                             $.ajax({
-                                url: '{{ base_url }}user/delete',
+                                url: '{{ base_url }}menu/delete',
                                 method: 'post',
                                 data: {
                                     id: id,
                                 },
                                 success(data) {
-                                    toastr.success(
-                                        `Data berhasil dihapus`,
-                                        'Success')
+                                    if (JSON.parse(data)) {
+                                        toastr.success(
+                                            `Data berhasil dihapus`,
+                                            'Success')
 
-                                    setTimeout(() => {
-                                        location.reload()
-                                    }, 500)
+                                        setTimeout(() => {
+                                            location.reload()
+                                        }, 500)
+                                    } else {
+                                        toastr.warning('Data tidak bisa dihapus', 'Failed')
+                                    }
                                 },
                                 error($xhr) {
                                     toastr.warning($xhr.statusText, 'Failed')
@@ -175,17 +222,25 @@
         }
 
         // Update button click
-        let update = (id, email, name, role) => {
+        let update = (id, id_tipe, nama, gambar, keterangan, harga, stok) => {
             postType = 'update'
             $('#id').val(id)
-            $('input[name="nama"]').val(name)
-            $('input[name="email"]').val(email)
-            $('select[name="role_id"]').val(role).change()
+
+            $('select[name="id_tipe"]').val(id_tipe).change()
+            $('input[name="nama"]').val(nama)
+            $('textarea[name="keterangan"]').val(keterangan)
+            $('input[name="harga"]').val(harga)
+            $('input[name="stok"]').val(stok)
             $('#myModalLabel').html('Update {{ $title }}')
             $('#myModal').modal('show')
         }
 
         $(() => {
+            // On Change Review File
+            $("#gambar").change(function() {
+                readURL(this, 'image-preview')
+            })
+
             // Add button click
             $('#addBtn').click(() => {
                 postType = 'create'
@@ -198,13 +253,33 @@
                 ev.preventDefault()
 
                 let url = postType == 'create' ?
-                    '{{ base_url }}user/insert' :
-                    '{{ base_url }}user/update';
+                    '{{ base_url }}menu/insert' :
+                    '{{ base_url }}menu/update';
+
+                // Get Form data
+                let fd = new FormData()
+                let gambar = $('#gambar')[0].files[0]
+
+                fd.append('id', $('#id').val())
+                fd.append('id_tipe', $('select[name="id_tipe"]').val())
+                fd.append('nama', $('input[name="nama"]').val())
+                fd.append('keterangan', $('textarea[name="keterangan"]').val())
+                fd.append('harga', $('input[name="harga"]').val())
+                fd.append('stok', $('input[name="stok"]').val())
+
+                // Check if image not change
+                if (gambar !== undefined) {
+                    fd.append('gambar', gambar)
+                }
 
                 $.ajax({
                     url: url,
                     method: 'post',
-                    data: $('#form').serialize(),
+                    data: fd,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    async: false,
                     success(data) {
                         toastr.success(
                             `Data berhasil ${postType == 'create' ? 'dibuat' : 'diubah'}`,
