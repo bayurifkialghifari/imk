@@ -50,6 +50,8 @@
 	$app->add('/menu/resep/delete', '\Resep', 'delete', 'post');
 
 	// Pesanan
+	$app->add('/listpesanan', '\ListPesanan');
+	$app->add('/listpesanan/siap', '\ListPesanan', 'siap', 'post');
 	$app->add('/pesanan', '\Pesanan');
 	$app->add('/pesanan/insert', '\Pesanan', 'insert', 'post');
 	$app->add('/pesanan/delete', '\Pesanan', 'delete', 'post');

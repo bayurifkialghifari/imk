@@ -43,11 +43,7 @@
 			$data['menu'] = $menu->result_array($menu->all());
             $data['pesanan'] = $pesanan['id'];
 
-            if($id != '') {
-                view('page.pesanan', $data);
-            } else {
-
-            }
+            view('page.pesanan', $data);            
 		}
 
         public function cekPesanan($id) {
