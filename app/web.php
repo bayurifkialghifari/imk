@@ -52,7 +52,6 @@
 	// Pesanan
 	$app->add('/pesanan', '\Pesanan');
 	$app->add('/pesanan/insert', '\Pesanan', 'insert', 'post');
-	$app->add('/pesanan/update', '\Pesanan', 'update', 'post');
 	$app->add('/pesanan/delete', '\Pesanan', 'delete', 'post');
 
 	// Meja Pelanggan

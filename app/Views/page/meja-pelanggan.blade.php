@@ -50,7 +50,7 @@
                                                 {{-- If meja sudah terisi --}}
                                                 @if ($cek->num_rows > 0)
                                                     <a class="btn btn-primary btn-sm"
-                                                        href="{{ base_url }}pesanan?meja={{ $d['id'] }}">
+                                                        href="{{ base_url }}pesanan?meja={{ $cek->fetch_assoc()['id'] }}">
                                                         <i class="fa fa-pencil"></i> Pesan Makanan
                                                     </a>
                                                     <button class="btn btn-warning btn-sm"
