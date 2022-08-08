@@ -37,6 +37,30 @@
 			view('page.laporan', $data);
 		}
 
+        // Export excel
+        public function exportexcel() {
+            // Request
+            $request = new Request;
+
+            // Get daily
+            $daily = self::getDailyReport();
+            // Get Weekly
+            $weekly = self::getWeeklyReport();
+            // Get Monthly
+            $monthly = self::getMonthlyReport();
+            // Get Yearly
+            $yearly = self::getYearlyReport();
+
+            // Get data
+            $data['daily'] = $daily;
+            $data['weekly'] = $weekly;
+            $data['monthly'] = $monthly;
+            $data['yearly'] = $yearly;
+            $data['type'] = $request->get('type');
+
+            view('excel', $data);
+        }
+
         // Daily report
         public function getDailyReport() {
             $pembayaran = new Pembayaran;

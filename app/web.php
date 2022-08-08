@@ -64,6 +64,7 @@
 
 	// Laporan
 	$app->add('/laporan', '\Laporan');
+	$app->add('/exportexcel', '\Laporan', 'exportexcel');
 
 	// Meja Pelanggan
 	$app->add('/meja-pelanggan', '\MejaPelanggan');

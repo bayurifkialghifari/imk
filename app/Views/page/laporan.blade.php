@@ -1,7 +1,7 @@
 @extends('layouts.plain')
 @section('content')
     <ol class="breadcrumb">
-        <li class="active"><a href="#">Laporan</a></li>
+        <li class="active"><a target="_blank" href="#">Laporan</a></li>
 
     </ol>
     <div class="container-fluid">
@@ -12,6 +12,10 @@
                         <div class="panel-heading">
                             <h2>Pendapatan Harian : {{ date('Y F d') }}</h2>
                             <div class="panel-ctrls"></div>
+                            <br>
+                            <a target="_blank"
+                                href="{{ base_url }}exportexcel?type=daily"class="btn btn-success btn-md"><i
+                                    class="fa fa-file"></i> Export Excel</a>
                         </div>
                         <div class="panel-body">
                             <table id="harian" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -57,6 +61,10 @@
                         <div class="panel-heading">
                             <h2>Pendapatan Mingguan : {{ date('Y F d', strtotime('-1 week')) }} - {{ date('Y F d') }}</h2>
                             <div class="panel-ctrls"></div>
+                            <br>
+                            <a target="_blank"
+                                href="{{ base_url }}exportexcel?type=weekly"class="btn btn-success btn-md"><i
+                                    class="fa fa-file"></i> Export Excel</a>
                         </div>
                         <div class="panel-body">
                             <table id="mingguan" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -102,6 +110,10 @@
                         <div class="panel-heading">
                             <h2>Pendapatan Bulanan : {{ date('F') }}</h2>
                             <div class="panel-ctrls"></div>
+                            <br>
+                            <a target="_blank"
+                                href="{{ base_url }}exportexcel?type=monthly"class="btn btn-success btn-md"><i
+                                    class="fa fa-file"></i> Export Excel</a>
                         </div>
                         <div class="panel-body">
                             <table id="bulanan" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -147,6 +159,10 @@
                         <div class="panel-heading">
                             <h2>Pendapatan Tahunan : {{ date('Y') }}</h2>
                             <div class="panel-ctrls"></div>
+                            <br>
+                            <a target="_blank"
+                                href="{{ base_url }}exportexcel?type=yearly"class="btn btn-success btn-md"><i
+                                    class="fa fa-file"></i> Export Excel</a>
                         </div>
                         <div class="panel-body">
                             <table id="tahunan" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -161,7 +177,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($monthly as $d)
+                                    @foreach ($yearly as $d)
                                         <tr>
                                             <td>{{ $d['nomor'] }}</td>
                                             <td>{{ $d['atas_nama'] }}</td>
@@ -200,7 +216,8 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" id="id">
                         <input type="hidden" name="id_pesanan" id="id_pesanan">
-                        <table id="pesanan-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="pesanan-table" class="table table-striped table-bordered" cellspacing="0"
+                            width="100%">
                             <thead>
                                 <tr>
                                     <th>Menu</th>
