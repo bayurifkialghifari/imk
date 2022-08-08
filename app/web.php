@@ -56,6 +56,12 @@
 	$app->add('/pesanan/insert', '\Pesanan', 'insert', 'post');
 	$app->add('/pesanan/delete', '\Pesanan', 'delete', 'post');
 
+	// Bayar pesanan
+	$app->add('/bayar', '\Bayar');
+	$app->add('/bayar/getlistpesanan', '\Bayar', 'getlistpesanan');
+	$app->add('/bayar/insert', '\Bayar', 'insert', 'post');
+	$app->add('/bayar/delete', '\Bayar', 'delete', 'post');
+
 	// Meja Pelanggan
 	$app->add('/meja-pelanggan', '\MejaPelanggan');
 	$app->add('/meja-pelanggan/isi_meja', '\MejaPelanggan', 'isi_meja', 'post');

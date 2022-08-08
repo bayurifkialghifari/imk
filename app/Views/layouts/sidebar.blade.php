@@ -15,7 +15,7 @@ $get_role = $get_role->fetch_assoc();
             <li><a href="{{ base_url }}"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
             <li><a href="{{ base_url }}listpesanan"><i class="fa fa-list"></i>Pesanan</a></li>
             <li><a href="{{ base_url }}meja-pelanggan"><i class="fa fa-table"></i>Meja Pelanggan</a></li>
-            <li><a href="{{ base_url }}listpesanan"><i class="fa fa-dollar"></i>Bayar</a></li>
+            <li><a href="{{ base_url }}bayar"><i class="fa fa-dollar"></i>Bayar</a></li>
             <li><a href="{{ base_url }}listpesanan"><i class="fa fa-file"></i>Laporan</a></li>
             <li><a href="javascript:void();"><i class="fa fa-database"></i><span>Master Data</span></a>
                 <ul class="acc-menu">
@@ -56,7 +56,7 @@ $get_role = $get_role->fetch_assoc();
     @if ($get_role['nama'] == 'Kasir')
         <ul class="acc-menu">
             <li><a href="{{ base_url }}"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
-            <li><a href="{{ base_url }}listpesanan"><i class="fa fa-dollar"></i>Bayar</a></li>
+            <li><a href="{{ base_url }}bayar"><i class="fa fa-dollar"></i>Bayar</a></li>
             <li><a href="{{ base_url }}listpesanan"><i class="fa fa-file"></i>Laporan</a></li>
         </ul>
     @endif

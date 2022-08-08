@@ -47,10 +47,13 @@
                                             <td>{{ $d['qty'] }}</td>
                                             <td>{{ $d['status'] }}</td>
                                             <td>
-                                                <button class="btn btn-success btn-sm"
-                                                    onclick="shap(`{{ $d['id'] }}`)">
-                                                    <i class="fa fa-check"></i> Pesanan Siap
-                                                </button>
+                                                @if ($status == 'Belum Siap')
+                                                    <button class="btn btn-success btn-sm"
+                                                        onclick="shap(`{{ $d['id'] }}`)">
+                                                        <i class="fa fa-check"></i> Pesanan Siap
+                                                    </button>
+                                                @else
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

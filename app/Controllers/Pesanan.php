@@ -38,6 +38,7 @@
             $data['meja'] = $meja_pelanggan->select('meja.nomor as nomor, meja_pelanggan.*, pelanggan.atas_nama as atas_nama')
             ->join('meja', 'meja.id', 'meja_pelanggan.id_meja')
             ->join('pelanggan', 'pelanggan.id', 'meja_pelanggan.id_pelanggan')
+            ->where('meja_pelanggan.id', $id)
             ->get();
 			$data['data'] = $detail_pesanan->result_array($get);
 			$data['menu'] = $menu->result_array($menu->all());
