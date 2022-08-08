@@ -21,10 +21,27 @@
  <th>Atas Nama</th>
  <th>Status</th>
  <th>Waktu Pemesanan</th>
+ <th>Total Pembayaran</th>
  <th>Action</th>
  </tr>
  </thead>
  <tbody>
+ <?php $__currentLoopData = $daily; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $d): $loop = $this->incrementLoopIndices();  ?>
+ <tr>
+ <td><?php echo \htmlentities($d['nomor'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['atas_nama'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['status'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['tanggalpesan'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['total'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td>
+ <button class="btn btn-danger btn-sm"
+ onclick="list_pesanan(`<?php echo \htmlentities($d['id'], ENT_QUOTES, 'UTF-8', false); ?>`, `<?php echo \htmlentities($d['id_pesanan'], ENT_QUOTES, 'UTF-8', false); ?>`)">
+ <i class="fa fa-list"></i> List Pesanan
+ </button>
+ </td>
+ </tr>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
  </tbody>
  </table>
  </div>
@@ -50,10 +67,27 @@
  <th>Atas Nama</th>
  <th>Status</th>
  <th>Waktu Pemesanan</th>
+ <th>Total Pembayaran</th>
  <th>Action</th>
  </tr>
  </thead>
  <tbody>
+ <?php $__currentLoopData = $weekly; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $d): $loop = $this->incrementLoopIndices();  ?>
+ <tr>
+ <td><?php echo \htmlentities($d['nomor'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['atas_nama'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['status'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['tanggalpesan'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['total'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td>
+ <button class="btn btn-danger btn-sm"
+ onclick="list_pesanan(`<?php echo \htmlentities($d['id'], ENT_QUOTES, 'UTF-8', false); ?>`, `<?php echo \htmlentities($d['id_pesanan'], ENT_QUOTES, 'UTF-8', false); ?>`)">
+ <i class="fa fa-list"></i> List Pesanan
+ </button>
+ </td>
+ </tr>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
  </tbody>
  </table>
  </div>
@@ -79,10 +113,27 @@
  <th>Atas Nama</th>
  <th>Status</th>
  <th>Waktu Pemesanan</th>
+ <th>Total Pembayaran</th>
  <th>Action</th>
  </tr>
  </thead>
  <tbody>
+ <?php $__currentLoopData = $monthly; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $d): $loop = $this->incrementLoopIndices();  ?>
+ <tr>
+ <td><?php echo \htmlentities($d['nomor'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['atas_nama'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['status'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['tanggalpesan'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['total'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td>
+ <button class="btn btn-danger btn-sm"
+ onclick="list_pesanan(`<?php echo \htmlentities($d['id'], ENT_QUOTES, 'UTF-8', false); ?>`, `<?php echo \htmlentities($d['id_pesanan'], ENT_QUOTES, 'UTF-8', false); ?>`)">
+ <i class="fa fa-list"></i> List Pesanan
+ </button>
+ </td>
+ </tr>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
  </tbody>
  </table>
  </div>
@@ -108,10 +159,27 @@
  <th>Atas Nama</th>
  <th>Status</th>
  <th>Waktu Pemesanan</th>
+ <th>Total Pembayaran</th>
  <th>Action</th>
  </tr>
  </thead>
  <tbody>
+ <?php $__currentLoopData = $monthly; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $d): $loop = $this->incrementLoopIndices();  ?>
+ <tr>
+ <td><?php echo \htmlentities($d['nomor'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['atas_nama'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['status'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['tanggalpesan'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($d['total'], ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td>
+ <button class="btn btn-danger btn-sm"
+ onclick="list_pesanan(`<?php echo \htmlentities($d['id'], ENT_QUOTES, 'UTF-8', false); ?>`, `<?php echo \htmlentities($d['id_pesanan'], ENT_QUOTES, 'UTF-8', false); ?>`)">
+ <i class="fa fa-list"></i> List Pesanan
+ </button>
+ </td>
+ </tr>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
  </tbody>
  </table>
  </div>
@@ -121,10 +189,91 @@
  </div>
  </div>
  </div> <!-- .container-fluid -->
+
+ <!-- Modal -->
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+ <form method="post" action="<?php echo \htmlentities(base_url, ENT_QUOTES, 'UTF-8', false); ?>bayar/insert" id="form">
+ <div class="modal-content">
+ <div class="modal-header">
+ <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+ &times;
+ </button>
+ <h4 class="modal-title" id="myModalLabel"></h4>
+ </div>
+ <div class="modal-body">
+ <input type="hidden" name="id" id="id">
+ <input type="hidden" name="id_pesanan" id="id_pesanan">
+ <table id="pesanan-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+ <thead>
+ <tr>
+ <th>Menu</th>
+ <th>Jumlah</th>
+ <th>Harga Satuan</th>
+ <th>Total Harga</th>
+ </tr>
+ </thead>
+ <tbody id="pesanan-data">
+ </tbody>
+ </table>
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-danger" data-dismiss="modal">
+ Close
+ </button>
+ </div>
+ </div><!-- /.modal-content -->
+ </form>
+ </div><!-- /.modal-dialog -->
+ </div><!-- /.modal -->
 <?php $this->stopSection(); ?>
 <?php $this->startPush('scripts'); ?>
  <script>
- $(() => {
+ // Get list pesanan
+ let list_pesanan = (id, id_pesanan) => {
+ // Reset datatable
+ $('#table-bahan').DataTable().clear().destroy()
+
+ // Show modal
+ $('#myModal').modal('show')
+ $('#myModalLabel').html('List Pesanan')
+
+ // Hide button
+ $('#bayar').hide()
+
+
+ $.ajax({
+ url: '<?php echo \htmlentities(base_url, ENT_QUOTES, 'UTF-8', false); ?>bayar/getlistpesanan?pesanan=' + id_pesanan,
+ success(data) {
+ // Total dibayar
+ let totalDibayar = 0
+ data = JSON.parse(data)
+ dataPesanan = data
+
+ $('#pesanan-data').html('')
+
+ // Echo data
+ data.forEach(r => {
+ $('#pesanan-data').append(`<tr>
+ <td>${r.menu}</td>
+ <td>${r.qty}</td>
+ <td>${r.harga}</td>
+ <td>${r.total}</td>
+ </tr>`)
+
+ totalDibayar += Number(r.total)
+ })
+
+ // Re initialize datatable
+ $('#pesanan-table').DataTable()
+ },
+ error($xhr) {
+ toastr.warning($xhr.statusText, 'Failed')
+ }
+ })
+ }
+
+ $(document).ready(function() {
  $('#harian').DataTable()
  $('#mingguan').DataTable()
  $('#bulanan').DataTable()

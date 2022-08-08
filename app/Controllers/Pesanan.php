@@ -60,6 +60,7 @@
                 $exe = $pesanan->create([
                     'id_meja_pelanggan' => $id,
                     'id_user' => $request->sess('id'),
+                    'created_at' => date('Y-m-d H:i:s'),
                 ]);
 
                 $cek = $pesanan->find(['id_meja_pelanggan' => $id]);
