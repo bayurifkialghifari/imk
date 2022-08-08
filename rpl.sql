@@ -68,7 +68,7 @@ CREATE TABLE `menu` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_tipe` int NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `gambar` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `gambar` varchar(150)  NOT NULL,
   `keterangan` text NOT NULL,
   `harga` int NOT NULL DEFAULT '0',
   `stok` int NOT NULL DEFAULT '0',
