@@ -83,6 +83,7 @@
                 'id_menu' => $id_menu,
                 'qty' => $data['jumlah_pesan'],
                 'total' => $data['total_harga'],
+                'created_at' => date('Y-m-d H:i:s'),
             ]);
 
             // Kurang stok menu

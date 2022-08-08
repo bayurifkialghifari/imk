@@ -60,7 +60,10 @@
 	$app->add('/bayar', '\Bayar');
 	$app->add('/bayar/getlistpesanan', '\Bayar', 'getlistpesanan');
 	$app->add('/bayar/insert', '\Bayar', 'insert', 'post');
-	$app->add('/bayar/delete', '\Bayar', 'delete', 'post');
+	// $app->add('/bayar/delete', '\Bayar', 'delete', 'post');
+
+	// Laporan
+	$app->add('/laporan', '\Laporan');
 
 	// Meja Pelanggan
 	$app->add('/meja-pelanggan', '\MejaPelanggan');

@@ -72,6 +72,7 @@
                 'total' => $data['total'],
                 'status' => 'Dibayar',
                 'bukti' => '',
+                'created_at' => date('Y-m-d H:i:s')
             ]);
             
             // Set message
