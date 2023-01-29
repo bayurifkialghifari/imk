@@ -1,5 +1,5 @@
 <?php
 
-	const base_url 			= 'http://localhost/kuliah/rpl/';
+	const base_url 			= 'http://localhost/bioskop/';
 	
 	// Tambahin ajah

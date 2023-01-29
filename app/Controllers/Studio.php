@@ -4,27 +4,27 @@
 
 	use App\Core\Controller;
 	use App\Liblaries\Sesion;
-	use App\Models\Meja as Mejas;
+	use App\Models\Studio as Studios;
 	use App\Core\Request;
 
-	Class Meja extends Controller
+	Class Studio extends Controller
 	{
 		public function __construct() {
 			Sesion::cekBelum();
 		}
 
 		public function index() {
-			$meja = new Mejas;
-			$get = $meja->all();
+			$studio = new Studios;
+			$get = $studio->all();
 
-			$data['title'] = 'Meja';
-			$data['data'] = $meja->result_array($get);
+			$data['title'] = 'Studio';
+			$data['data'] = $studio->result_array($get);
 
-			view('page.meja', $data);
+			view('page.studio', $data);
 		}
 
 		public function insert() {
-			$meja = new Mejas;
+			$studio = new Studios;
 			$request = new Request;
 
 			// Get data post
@@ -32,30 +32,30 @@
 			unset($data['id']);
 
 			// Create data
-			$exe = $meja->create($data);
+			$exe = $studio->create($data);
 
 			echo json_encode($exe);
 		}
 
 		public function update() {
-			$meja = new Mejas;
+			$studio = new Studios;
 			$request = new Request;	
 
 			// Get data post
 			$data = $request->post_all();
 
 			// Update data
-			$exe = $meja->update(['id' => $data['id']], $data);
+			$exe = $studio->update(['id' => $data['id']], $data);
 
 			echo json_encode($exe);
 		}
 
 		public function delete() {
-			$meja = new Mejas;
+			$studio = new Studios;
 			$request = new Request;	
 
 			// Delete data
-			$exe = $meja->delete(['id' => $request->post('id')]);
+			$exe = $studio->delete(['id' => $request->post('id')]);
 
 			echo json_encode($exe);
 		}

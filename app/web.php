@@ -17,70 +17,30 @@
 
 	// Router
 	$app->add('/', '\Dashboard');
-
-	// Master data 
-	$app->add('/bahan', '\Bahan');
-	$app->add('/bahan/insert', '\Bahan', 'insert', 'post');
-	$app->add('/bahan/update', '\Bahan', 'update', 'post');
-	$app->add('/bahan/delete', '\Bahan', 'delete', 'post');
-
-	$app->add('/meja', '\Meja');
-	$app->add('/meja/insert', '\Meja', 'insert', 'post');
-	$app->add('/meja/update', '\Meja', 'update', 'post');
-	$app->add('/meja/delete', '\Meja', 'delete', 'post');
-
-	$app->add('/tipe', '\Tipe');
-	$app->add('/tipe/insert', '\Tipe', 'insert', 'post');
-	$app->add('/tipe/update', '\Tipe', 'update', 'post');
-	$app->add('/tipe/delete', '\Tipe', 'delete', 'post');
-
-	// Menu
-	$app->add('/menu', '\Menu');
-	$app->add('/menu/insert', '\Menu', 'insert', 'post');
-	$app->add('/menu/update', '\Menu', 'update', 'post');
-	$app->add('/menu/delete', '\Menu', 'delete', 'post');
-	$app->add('/menu/checkResep', '\Menu', 'checkResep');
-	$app->add('/menu/addStok', '\Menu', 'addStok', 'post');
-	$app->add('/menu/minStok', '\Menu', 'minStok', 'post');
-
-	// Resep
-	$app->add('/menu/resep', '\Resep');
-	$app->add('/menu/resep/insert', '\Resep', 'insert', 'post');
-	$app->add('/menu/resep/update', '\Resep', 'update', 'post');
-	$app->add('/menu/resep/delete', '\Resep', 'delete', 'post');
-
-	// Pesanan
-	$app->add('/listpesanan', '\ListPesanan');
-	$app->add('/listpesanan/siap', '\ListPesanan', 'siap', 'post');
-	$app->add('/pesanan', '\Pesanan');
-	$app->add('/pesanan/insert', '\Pesanan', 'insert', 'post');
-	$app->add('/pesanan/delete', '\Pesanan', 'delete', 'post');
-
-	// Bayar pesanan
-	$app->add('/bayar', '\Bayar');
-	$app->add('/bayar/getlistpesanan', '\Bayar', 'getlistpesanan');
-	$app->add('/bayar/insert', '\Bayar', 'insert', 'post');
-	// $app->add('/bayar/delete', '\Bayar', 'delete', 'post');
-
-	// Laporan
-	$app->add('/laporan', '\Laporan');
-	$app->add('/exportexcel', '\Laporan', 'exportexcel');
-
-	// Meja Pelanggan
-	$app->add('/meja-pelanggan', '\MejaPelanggan');
-	$app->add('/meja-pelanggan/isi_meja', '\MejaPelanggan', 'isi_meja', 'post');
-	$app->add('/meja-pelanggan/batal_isi', '\MejaPelanggan', 'batal_isi', 'post');
-
 	// User Management
-	$app->add('/role', '\Role');
-	$app->add('/role/insert', '\Role', 'insert', 'post');
-	$app->add('/role/update', '\Role', 'update', 'post');
-	$app->add('/role/delete', '\Role', 'delete', 'post');
+	$app->add('/film', '\Film');
+	$app->add('/film/insert', '\Film', 'insert', 'post');
+	$app->add('/film/update', '\Film', 'update', 'post');
+	$app->add('/film/delete', '\Film', 'delete', 'post');
 
-	$app->add('/user', '\User');
-	$app->add('/user/insert', '\User', 'insert', 'post');
-	$app->add('/user/update', '\User', 'update', 'post');
-	$app->add('/user/delete', '\User', 'delete', 'post');
+
+	$app->add('/studio', '\Studio');
+	$app->add('/studio/insert', '\Studio', 'insert', 'post');
+	$app->add('/studio/update', '\Studio', 'update', 'post');
+	$app->add('/studio/delete', '\Studio', 'delete', 'post');
+
+
+	// jadwal tayang
+	$app->add('/jadwal', '\Jadwal');
+	$app->add('/jadwal/insert', '\Jadwal', 'insert', 'post');
+	$app->add('/jadwal/update', '\Jadwal', 'update', 'post');
+	$app->add('/jadwal/delete', '\Jadwal', 'delete', 'post');
+
+	// Pegawai
+	$app->add('/pegawai', '\Pegawai');
+	$app->add('/pegawai/insert', '\Pegawai', 'insert', 'post');
+	$app->add('/pegawai/update', '\Pegawai', 'update', 'post');
+	$app->add('/pegawai/delete', '\Pegawai', 'delete', 'post');
 
 	// Auth
 	$app->add('/login', '\Auth\Login');

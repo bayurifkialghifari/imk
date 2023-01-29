@@ -28,7 +28,7 @@
 			
 
 			// Auth
-			Auth::table('user');
+			Auth::table('pegawai');
 			Auth::user_field('email');
 			Auth::password_field('password');
 

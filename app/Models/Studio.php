@@ -4,6 +4,6 @@
 
 	use App\Core\ORMModel;
 
-	Class Meja extends ORMModel
+	Class Studio extends ORMModel
 	{
 	}
