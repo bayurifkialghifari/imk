@@ -21,11 +21,12 @@ class Tiket extends Controller
     public function index()
     {
         $tiket = new Tikets;
-        $tiket = $tiket->select('tiket.*, jadwal.tanggal as tanggal, jadwal.jam as jam, kursi.no as no_kursi')
+        $tiket = $tiket->select('tiket.*, jadwal.tanggal as tanggal, jadwal.jam as jam, film.nama as film, kursi.no as no_kursi')
             ->join('jadwal', 'jadwal.id', 'tiket.id_jadwal')
+            ->join('film', 'jadwal.id_film', 'film.id')
             ->join('kursi', 'kursi.id', 'tiket.id_kursi');
         $get = $tiket->get();
-        $jadwal = (new Jadwal)->all();
+        $jadwal = (new Jadwal)->select('jadwal.*, film.nama as film')->join('film', 'jadwal.id_film', 'film.id')->get();
         $kursi = (new Kursi)->all();
 
         $data['title'] = 'Kursi';

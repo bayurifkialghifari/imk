@@ -18,7 +18,7 @@ class Kursi extends Controller
     public function index()
     {
         $kursi = new Kursis;
-        $kursi = $kursi->select('kursi.*, kursi.no as no_kursi')
+        $kursi = $kursi->select('kursi.*, studio.nama as nama_studio')
             ->join('studio', 'studio.id', 'kursi.id_studio');
         $get = $kursi->get();
         $studio = (new Studio)->all();

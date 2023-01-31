@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
 
         <li><a href="#">Dashboard</a></li>
-        <li class="active"><a href="#">Film</a></li>
+        <li class="active"><a href="#">Studio</a></li>
 
     </ol>
     <div class="container-fluid">

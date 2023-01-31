@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
 
         <li><a href="#">Dashboard</a></li>
-        <li class="active"><a href="#">Film</a></li>
+        <li class="active"><a href="#">Tiket</a></li>
 
     </ol>
     <div class="container-fluid">
@@ -31,7 +31,7 @@
                                         <th>No</th>
                                         <th>Harga</th>
                                         <th>Stok</th>
-                                        <th>Tanggal</th>
+                                        <th>Jadwal Film</th>
                                         <th>Kursi</th>
                                         <th>Action</th>
                                     </tr>
@@ -43,7 +43,7 @@
                                             <td>{{ $d['no'] }}</td>
                                             <td>{{ $d['harga'] }}</td>
                                             <td>{{ $d['stok'] }}</td>
-                                            <td>{{ $d['tanggal'] }}</td>
+                                            <td>{{ $d['film'] }} - {{ $d['tanggal'] }} </td>
                                             <td>{{ $d['no_kursi'] }}</td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm"
@@ -111,7 +111,7 @@
                                     <select name="id_jadwal" class="form-control" required>
                                         <option value="">--Pilih Jadwal--</option>
                                         @foreach($jadwal as $s)
-                                            <option value="{{ $s['id'] }}">{{ $s['tanggal'] }}</option>
+                                            <option value="{{ $s['id'] }}">{{ $s['film'] . '-' . $s['tanggal'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>

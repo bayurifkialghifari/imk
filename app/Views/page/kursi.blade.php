@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
 
         <li><a href="#">Dashboard</a></li>
-        <li class="active"><a href="#">Film</a></li>
+        <li class="active"><a href="#">Kursi</a></li>
 
     </ol>
     <div class="container-fluid">
@@ -27,14 +27,15 @@
                             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        <th>Kursi</th>
                                         <th>No</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $d)
                                         <tr class="odd gradeX">
-                                            <td>{{ $d['id'] }}</td>
+                                            <td>{{ $d['nama_studio'] }}</td>
                                             <td>{{ $d['no'] }}</td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm"
@@ -42,7 +43,7 @@
                                                     <i class="fa fa-trash-o"></i> Delete
                                                 </button>
                                                 <button class="btn btn-primary btn-sm"
-                                                    onclick="update(`{{ $d['id'] }}`, `{{ $d['no'] }}`)">
+                                                    onclick="update(`{{ $d['id'] }}`, `{{ $d['id_studio'] }}`, `{{ $d['no'] }}`)">
                                                     <i class="fa fa-pencil"></i> Update
                                                 </button>
                                             </td>
@@ -88,7 +89,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="no"> No</label>
-                                    <input type="text" class="form-control" name="no" placeholder="No" required />
+                                    <input type="number" class="form-control" name="no" placeholder="No" required />
                                 </div>
                             </div>
                         </div>
