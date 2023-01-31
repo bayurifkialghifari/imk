@@ -60,6 +60,18 @@ $app->add('/tiket/insert', '\Tiket', 'insert', 'post');
 $app->add('/tiket/update', '\Tiket', 'update', 'post');
 $app->add('/tiket/delete', '\Tiket', 'delete', 'post');
 
+// Pelanggan
+$app->add('/pelanggan', '\Pelanggan');
+$app->add('/pelanggan/insert', '\Pelanggan', 'insert', 'post');
+$app->add('/pelanggan/update', '\Pelanggan', 'update', 'post');
+$app->add('/pelanggan/delete', '\Pelanggan', 'delete', 'post');
+
+// Penjualan tiket
+$app->add('/penjualan-tiket', '\PenjualanTiket');
+$app->add('/penjualan-tiket/insert', '\PenjualanTiket', 'insert', 'post');
+$app->add('/penjualan-tiket/update', '\PenjualanTiket', 'update', 'post');
+$app->add('/penjualan-tiket/delete', '\PenjualanTiket', 'delete', 'post');
+
 // Auth
 $app->add('/login', '\Auth\Login');
 $app->add('/doLogin', '\Auth\Login', 'doLogin', 'post');
