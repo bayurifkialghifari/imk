@@ -1,5 +1,5 @@
 <?php
 
-const base_url 			= 'http://localhost/bioskop/';
+const base_url 			= 'http://localhost/imk/';
 	
 	// Tambahin ajah
