@@ -134,7 +134,8 @@
 				*/
 				$cek_auth 				= $cek_auth->fetch_assoc();
 
-				$cek_hash 				= Hash::hash_check($password, $cek_auth[$password_field]);
+                $hash                   = new Hash;
+				$cek_hash 				= $hash->hash_check($password, $cek_auth[$password_field]);
 
 				/* If password true */
 				if($cek_hash > 0)
@@ -142,10 +143,10 @@
 					/* Set session auth */
 					foreach($cek_auth as $name => $value)
 					{
-						Request::set_session([$name => $value]);
+						(new Request)->set_session([$name => $value]);
 					}
 
-					Request::set_session(['status' => true]);
+					(new Request)->set_session(['status' => true]);
 
 					/* Return data auth */
 					return array(
@@ -202,7 +203,7 @@
         */
         public function check_login()
         {
-        	return Sesion::cekLogin();
+        	return (new Sesion)->cekLogin();
         }
 
         /**
@@ -213,7 +214,7 @@
         */
         public function check_not_login()
         {
-        	return Sesion::cekBelum();
+        	return (new Sesion)->cekBelum();
         }
 
         /**
@@ -224,6 +225,6 @@
         */
         public function logout()
         {
-        	return Request::destroy_session();
+        	return (new Request)->destroy_session();
         }
 	}

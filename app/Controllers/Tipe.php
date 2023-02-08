@@ -10,7 +10,7 @@
 	Class Tipe extends Controller
 	{
 		public function __construct() {
-			Sesion::cekBelum();
+			(new Sesion)->cekBelum();
 		}
 
 		public function index() {

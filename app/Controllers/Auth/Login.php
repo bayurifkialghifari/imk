@@ -10,7 +10,7 @@
 	Class Login extends Controller
 	{
 		public function __construct() {
-			Sesion::cekLogin();
+			(new Sesion)->cekLogin();
 		}
 
 		public function index() {
@@ -28,18 +28,21 @@
 			
 
 			// Auth
-			Auth::table('pegawai');
-			Auth::user_field('email');
-			Auth::password_field('password');
+			$auth = new Auth;
+			
+			$auth->table('pegawai');
+			$auth->user_field('email');
+			$auth->password_field('password');
 
 			// Execute Auth
-			$exe = Auth::login($email, $password);
+			$exe = $auth->login($email, $password);
 		
 			echo json_encode($exe);
 		}
 
 		public function logout() {
-			Auth::logout();
+			$auth = new Auth;
+			$auth->logout();
 
 			redirect_back();
 		}
